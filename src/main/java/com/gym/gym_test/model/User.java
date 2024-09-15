@@ -1,41 +1,61 @@
 package com.gym.gym_test.model;
+
 import java.io.Serializable;
 
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
-@Document
-public class User implements Serializable{
+@Document(collection = "users")  // Adicionando o nome da coleção
+public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    private Integer _id;
-    private Integer userRegistration;
+    private String id;
+
+    @Indexed(unique = true)
+    private Integer matriculation;
+    
+    private String userName;
     private String password;
     private UserRole userRole;
 
-    public User(Integer id, Integer userRegistration, String password, UserRole userRole){
-        this._id = id;
-        this.userRegistration = userRegistration;
+    // Construtor padrão
+    public User() {
+    }
+
+    // Construtor com parâmetros
+    public User(String id, String userName, Integer matriculation, String password, UserRole userRole) {
+        this.id = id;
+        this.userName = userName;
+        this.matriculation = matriculation;
         this.password = password;
         this.userRole = userRole;
     }
 
-    public int get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(Integer Userid) {
-        this._id = Userid;
+    public void setId(String id) {
+        this.id = id; 
     }
 
-    public Integer getUserRegistration() {
-        return userRegistration;
+    public Integer getMatriculation() {
+        return matriculation;
     }
 
-    public void setUserRegistration(Integer userName) {
-        this.userRegistration = userName;
+    public void setMatriculation(Integer matriculation) {
+        this.matriculation = matriculation;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }    
 
     public String getPassword() {
         return password;
@@ -57,7 +77,7 @@ public class User implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((_id == null) ? 0 : _id.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());  // Corrigido para usar 'id'
         return result;
     }
 
@@ -70,10 +90,10 @@ public class User implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         User other = (User) obj;
-        if (_id == null) {
-            if (other._id != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!_id.equals(other._id))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }
@@ -81,9 +101,10 @@ public class User implements Serializable{
     @Override
     public String toString() {
         return "User{" +
-                "id=" + _id +
-                ", Matrícula='" + userRegistration + '\'' +
-                ", Tipo de usuário=" + userRole +
+                "id='" + id + '\'' +  // Ajustado para usar 'id'
+                ", userRegistration=" + userName +
+                ", password='" + password + '\'' +
+                ", userRole=" + userRole +
                 '}';
     }
 }
