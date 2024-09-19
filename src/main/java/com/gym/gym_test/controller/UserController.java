@@ -30,9 +30,9 @@ public class UserController {
         return ResponseEntity.ok().body(list);   
     }
 
-    @GetMapping("/{_id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable("_id") String _id) {
-        Optional<User> user = service.findById(_id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<User>> findById(@PathVariable("id") String id) {
+        Optional<User> user = service.findById(id);
         return ResponseEntity.ok().body(user);
     }
     
@@ -40,6 +40,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
         User newUser = service.createUser(user);
+        
+
         return ResponseEntity.ok().body(newUser);
     }
     

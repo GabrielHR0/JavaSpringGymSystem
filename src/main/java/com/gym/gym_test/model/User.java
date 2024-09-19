@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.gym.gym_test.service.MatriculationGenerator;
+
 import org.springframework.data.annotation.Id;
 
 @Document(collection = "users")  // Adicionando o nome da coleção
@@ -16,21 +19,19 @@ public class User implements Serializable {
     @Indexed(unique = true)
     private Integer matriculation;
     
-    private String userName;
     private String password;
-    private UserRole userRole;
+
+    private String profileId;
 
     // Construtor padrão
     public User() {
     }
 
     // Construtor com parâmetros
-    public User(String id, String userName, Integer matriculation, String password, UserRole userRole) {
+    public User(String id, Integer matriculation, String password) {
         this.id = id;
-        this.userName = userName;
         this.matriculation = matriculation;
         this.password = password;
-        this.userRole = userRole;
     }
 
     public String getId() {
@@ -49,28 +50,12 @@ public class User implements Serializable {
         this.matriculation = matriculation;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }    
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
     }
 
     @Override
@@ -102,9 +87,8 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +  // Ajustado para usar 'id'
-                ", userRegistration=" + userName +
+                ", Matriculation=" + matriculation +
                 ", password='" + password + '\'' +
-                ", userRole=" + userRole +
                 '}';
     }
 }
