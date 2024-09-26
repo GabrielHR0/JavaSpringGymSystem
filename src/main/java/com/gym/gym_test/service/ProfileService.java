@@ -3,17 +3,17 @@ package com.gym.gym_test.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gym.gym_test.model.UserProfile;
+import com.gym.gym_test.model.Profile;
 import com.gym.gym_test.repository.ProfileRepository;
 
 @Service
-public class UserProfileService {
+public class ProfileService {
     
     @Autowired
-    private ProfileRepository Profilerepo;
+    private ProfileRepository repo;
 
-    public UserProfile createProfile(UserProfile profile){
-        return Profilerepo.save(profile);
+    public Profile createProfile(Profile profile){
+        return repo.save(profile);
     }
 
 }

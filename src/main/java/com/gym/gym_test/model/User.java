@@ -5,8 +5,6 @@ import java.io.Serializable;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.gym.gym_test.service.MatriculationGenerator;
-
 import org.springframework.data.annotation.Id;
 
 @Document(collection = "users")  // Adicionando o nome da coleção
@@ -23,15 +21,38 @@ public class User implements Serializable {
 
     private String profileId;
 
+    
+
     // Construtor padrão
     public User() {
     }
 
+    public User(String profileId) {
+        this.profileId = profileId;
+    }
+
+    // Construtor com parâmetros sem profile id
+    /*public User(String id, String password) {
+        this.id = id;
+        this.matriculation = MatriculationGenerator.generateMatriculation();  // Geração automática
+        this.password = password;
+    }*/
+
     // Construtor com parâmetros
-    public User(String id, Integer matriculation, String password) {
+    public User(String id, Integer matriculation, String password, String profileId) {
         this.id = id;
         this.matriculation = matriculation;
         this.password = password;
+        this.profileId = profileId;
+    }
+
+    // Getters and Setters
+    public String getProfileId() {
+        return profileId;
+    }
+
+    public void setProfileId(String profileId) {
+        this.profileId = profileId;
     }
 
     public String getId() {
