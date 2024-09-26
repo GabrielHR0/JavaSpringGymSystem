@@ -16,6 +16,7 @@ import com.gym.gym_test.service.ProfileService;
 import com.gym.gym_test.service.UserService;
 import com.gym.gym_test.model.Profile;
 import com.gym.gym_test.model.User;
+import com.gym.gym_test.model.UserProfileDTO;
 
 @RestController
 @RequestMapping(value="/users")
@@ -43,46 +44,22 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
- // Serviço para Profile
-
-    @PostMapping
-    public ResponseEntity<?> createUserAndProfile(@RequestBody UserProfileDto userProfileDto) {
-        // Criar perfil
-        Profile newProfile = profileService.createProfile(userProfileDto.getProfile());
-        
-        // Criar usuário
-        User newUser = new User();
-        newUser.setMatriculation(userProfileDto.getUser().getMatriculation());
-        newUser.setPassword(userProfileDto.getUser().getPassword());
-        newUser.setProfileId(newProfile.getId()); // Usar o ID do perfil criado
-        
-        newUser = service.createUser(newUser);
-        
-        return ResponseEntity.ok().body(newUser); // Retornar o usuário criado ou o perfil
-    }
-}
-
-// DTO para encapsular o User e o Profile
-class UserProfileDto {
-    private User user;
-    private Profile profile;
-
-    // Getters e Setters
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
-    public Profile getProfile() {
-        return profile;
-    }
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-}
-
+ // Criar usuário com perfil (Novo método)
     
+    @PostMapping("/create")
+    public ResponseEntity<User> createUser(@RequestBody UserProfileDTO userProfileDto) {
+
+        Profile profile = userProfileDto.getProfile();
+        Profile newProfile = profileService.createProfile(profile);
+
+        User user = userProfileDto.getUser();
+        user.setProfileId(newProfile.getId());
+
+        User newUser = service.createUser(user);
+
+        return ResponseEntity.ok().body(newUser);
+    }
+}
     /*
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
