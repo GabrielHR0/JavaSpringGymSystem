@@ -1,4 +1,7 @@
-package com.gym.gym_test.model;
+package com.gym.gym_test.dto;
+
+import com.gym.gym_test.model.Profile;
+import com.gym.gym_test.model.User;
 
 public class UserProfileDTO {
     

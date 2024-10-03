@@ -14,9 +14,9 @@ import org.springframework.http.ResponseEntity;
 
 import com.gym.gym_test.service.ProfileService;
 import com.gym.gym_test.service.UserService;
+import com.gym.gym_test.dto.UserProfileDTO;
 import com.gym.gym_test.model.Profile;
 import com.gym.gym_test.model.User;
-import com.gym.gym_test.model.UserProfileDTO;
 
 @RestController
 @RequestMapping(value="/users")

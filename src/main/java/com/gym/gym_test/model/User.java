@@ -5,9 +5,11 @@ import java.io.Serializable;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.mongodb.lang.NonNull;
+
 import org.springframework.data.annotation.Id;
 
-@Document(collection = "users")  // Adicionando o nome da coleção
+@Document(collection = "users")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     
@@ -15,11 +17,14 @@ public class User implements Serializable {
     private String id;
 
     @Indexed(unique = true)
+    @NonNull
     private Integer matriculation;
     
+    @NonNull
     private String password;
 
     private String profileId;
+    private String contractId;
 
     
 

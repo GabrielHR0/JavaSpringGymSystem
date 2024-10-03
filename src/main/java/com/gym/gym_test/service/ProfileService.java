@@ -1,5 +1,7 @@
 package com.gym.gym_test.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +12,14 @@ import com.gym.gym_test.repository.ProfileRepository;
 public class ProfileService {
     
     @Autowired
-    private ProfileRepository repo;
+    private ProfileRepository repository;
+
+    public List<Profile> findAll(){
+        return repository.findAll();
+    }
 
     public Profile createProfile(Profile profile){
-        return repo.save(profile);
+        return repository.save(profile);
     }
 
 }

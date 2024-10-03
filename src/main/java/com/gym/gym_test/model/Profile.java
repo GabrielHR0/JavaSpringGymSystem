@@ -18,7 +18,7 @@ public class Profile implements Serializable {
 
     private String firstName;
     private String lastName;
-    private LocalDate birthDate;  // Alterado para LocalDate
+    private LocalDate birthDate;
     private String gender;
     private String email;
     private long phoneNumber;
